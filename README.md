@@ -6,16 +6,23 @@ The system uses a **Minecraft Spigot server** for the backend game servers, with
 
 ## Features
 
+- **User Accounts**: 
+  - Users can log in and register.
+  - Normal users can see and manage their own servers.
+  - Admins can view and control all servers.
 - **Dynamic Server Start/Stop**: The system automatically starts the corresponding Minecraft server when a player connects to a subdomain, and it stops the server when the last player leaves. This is achieved using the **Bungeecord** proxy to handle connections and routing.
 - **Automatic Player Assignment**: Players are automatically assigned to the correct dynamic server based on the subdomain they connect to. For instance, accessing `test.bukkit.news` would route the player to the `test` server, automatically starting it if necessary.
+- **Live Server Status**: Displays online servers along with the current player count.
 - **MOTD Support**: The Message of the Day (MOTD) will be shown to players even if the backend server is offline. This ensures that players can still see a welcoming message or an alert while waiting for the server to come online.
 - **Overload Protection**: The system can reject new subdomain requests if the hardware is under heavy load (CPU or RAM usage exceeds a configured threshold). This helps prevent overloading your servers.
+- **Web Interface for Server Control**: Users can start and stop servers directly from a web interface.
 
 ## Technologie-Stack
 
+- **Frontend**: Thymeleaf or React (Configurable)
+- **Backend**: Java (Spring Boot & Spring Security)
 - **Minecraft Server**: **Spigot** - a high-performance Minecraft server software.
 - **Proxy**: **BungeeCord** - a proxy server that allows the dynamic connection of players to various Minecraft servers.
-- **Server Management**: **Java (Spring Boot)** - the server management and orchestration system that controls the starting and stopping of Minecraft servers based on player demand.
 - **Database (optional for Tracking)**: **MySQL** - used for tracking player connections, server uptime, and other usage statistics (optional for your use case).
 - **Deployment**: **Docker** - for containerized deployment, ensuring easy setup and portability.
 
@@ -46,3 +53,4 @@ The system uses a **Minecraft Spigot server** for the backend game servers, with
    ```bash
    git clone https://github.com/yourusername/dynamic-server-management.git
    cd dynamic-server-management
+   
