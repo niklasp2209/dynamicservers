@@ -9,10 +9,18 @@ This system allows you to dynamically start and stop Minecraft servers based on 
 - **MOTD Support**: The MOTD for the server remains functional even if the backend server is offline.
 - **Overload Protection**: The system can reject subdomains and user requests if the hardware is under heavy load to avoid overloading the system.
 
+## Technologie-Stack
+
+- **Minecraft Server**: Spigot
+- **Proxy**: BungeeCord
+- **Server-Management**: Java (Spring Boot)
+- **Datenbank (optional für Tracking)**: MySQL
+- **Deployment**: Docker
+
 ## Prerequisites
 
 - **Bungeecord**: The proxy server that manages connections between players and the dynamic Minecraft servers.
-- **Java 17 or higher**: Minimum requirement for running Minecraft and Bungeecord.
+- **Java 8 or higher**: Minimum requirement for running Minecraft and Bungeecord.
 - **Minecraft Servers**: One or more backend Minecraft servers for players to connect to.
 - **DNS Management**: The ability to manage subdomains for automatic server creation.
 
