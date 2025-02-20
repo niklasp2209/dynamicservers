@@ -1,13 +1,126 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DynamicServer - Register</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .header {
+            height: 64px;
+        }
+
+        .login-section, .register-section {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            background-color: #1f2937;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+<!-- Navigation -->
+<nav class="fixed top-0 left-0 right-0 bg-gray-800 bg-opacity-75 p-4 z-50 header">
+    <div class="flex justify-between items-center">
+        <a href="#" class="text-2xl font-bold text-white">DynamicServer</a>
+        <ul class="flex space-x-6">
+            <li><a href="#" onclick="showLogin()" class="hover:text-blue-500 transition">Login</a>
+            </li>
+            <li><a href="#" onclick="showRegister()"
+                   class="hover:text-blue-500 transition">Register</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Register Section -->
+<section id="register" class="my-12 pt-20">
+    <div class="register-section">
+        <h2 class="text-2xl font-bold text-center mb-6">Register</h2>
+        <form id="registerForm" method="POST">
+            <div class="mb-4">
+                <label for="username_register"
+                       class="block text-gray-300 mb-2">Username</label>
+                <input type="text" id="username_register" name="username_register"
+                       required
+                       class="w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div class="mb-4">
+                <label for="email_register"
+                       class="block text-gray-300 mb-2">E-Mail</label>
+                <input type="email" id="email_register" name="email_register" required
+                       class="w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div class="mb-4">
+                <label for="password_register"
+                       class="block text-gray-300 mb-2">Password</label>
+                <input type="password" id="password_register" name="password_register"
+                       required
+                       class="w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <div class="mb-4">
+                <label for="confirm_password_register" class="block text-gray-300 mb-2">Confirm
+                    Password</label>
+                <input type="password" id="confirm_password_register"
+                       name="confirm_password_register" required
+                       class="w-full p-3 rounded-lg bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            </div>
+            <button type="submit"
+                    class="w-full bg-blue-600 hover:bg-blue-500 transition duration-300 p-3 rounded-lg text-white font-semibold">
+                Register
+            </button>
+        </form>
+        <p class="mt-4 text-center text-gray-400">Already have an account? <a href="#"
+                                                                              onclick="showLogin()"
+                                                                              class="text-blue-500">Login
+            here</a></p>
+    </div>
+</section>
+
+<script>
+    function showLogin() {
+        document.getElementById('login').style.display = 'block';
+        document.getElementById('register').style.display = 'none';
+    }
+
+    function showRegister() {
+        document.getElementById('register').style.display = 'block';
+        document.getElementById('login').style.display = 'none';
+    }
+
+    document.getElementById('registerForm').addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        const username = document.getElementById('username_register').value;
+        const email = document.getElementById('email_register').value;
+        const password = document.getElementById('password_register').value;
+        const confirmPassword = document.getElementById('confirm_password_register').value;
+
+        if (password !== confirmPassword) {
+            alert("Die Passwörter stimmen nicht überein.");
+            return;
+        }
+
+        try {
+            const response = await axios.post("https://deine-api-url.com/auth/register", {
+                username: username,
+                email: email,
+                password: password
+            });
+
+            alert("Registrierung erfolgreich! Bitte logge dich ein.");
+            showLogin();
+        } catch (error) {
+            console.error(error);
+            alert("Die Registrierung ist fehlgeschlagen.");
+        }
+    });
+</script>
+
+</body>
 </html>
