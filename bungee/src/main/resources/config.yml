@@ -1,0 +1,6 @@
+server_manager_url: "http://localhost:8080"
+server_start_endpoint: "/server/start"
+server_stop_endpoint: "/server/stop"
+motd_offline: "&cServer wird gestartet..."
+motd_online: "&aServer ist online!"
+max_servers: 10
